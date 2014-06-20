@@ -10,6 +10,12 @@ pc.brush = function() {
   pc.render();
 };
 
+pc.brushend = function() {
+    __.brushed = selected();
+    events.brushend.call(pc,__.brushed);
+    //pc.render();
+};
+
 // expose a few objects
 pc.xscale = xscale;
 pc.yscale = yscale;
