@@ -85,6 +85,7 @@ pc.brushable = function() {
               d3.event.sourceEvent.stopPropagation();
             })
             .on("brush", pc.brush)
+            .on("brushend", pc.brushend)
         );
       })
     .selectAll("rect")
