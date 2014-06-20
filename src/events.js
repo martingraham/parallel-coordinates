@@ -1,4 +1,4 @@
-var events = d3.dispatch.apply(this,["render", "resize", "highlight", "brush"].concat(d3.keys(__))),
+var events = d3.dispatch.apply(this,["render", "resize", "highlight", "brush", "brushend"].concat(d3.keys(__))),
     w = function() { return __.width - __.margin.right - __.margin.left; },
     h = function() { return __.height - __.margin.top - __.margin.bottom; },
     flags = {
@@ -50,7 +50,11 @@ var side_effects = d3.dispatch.apply(this,d3.keys(__))
 	  __.clusterCentroids = compute_cluster_centroids(__.bundleDimension);
   })
   .on("hideAxis", function(d) {
-	  pc.dimensions(_.without(__.dimensions, d.value));
+	  //pc.dimensions(_.without(__.dimensions, d.value));   // needs underscore
+        // MG
+      pc.dimensions(__.dimensions.filter (
+          function(elem) { return d.value.indexOf(elem) === -1; })
+      );
   });
 
 // expose the state of the chart
